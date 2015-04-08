@@ -62,7 +62,7 @@ Application::Application()
 	TextureMaps textureMaps;
 
 	// Add a texture to the path below
-	textureMaps.diffuse = Texture::load(TextureType::Texture2D, "assets/textures/diffuse.png");
+	textureMaps.diffuse = Texture::load(TextureType::Texture2D, "assets/textures/texture.png");
 
 	// Add a model file to the path below
 	_mesh = Mesh::load("assets/models/model.dae", _effect, textureMaps);
