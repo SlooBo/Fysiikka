@@ -13,6 +13,6 @@ public:
 
 	void getOtherPoints(Vertex *vs[2], Vertex *v);
 
-	Vector normal();
+	Vector Normal();
 };
 

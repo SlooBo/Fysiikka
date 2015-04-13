@@ -8,9 +8,9 @@ public:
 
 	Vertex(float x, float y, float z){ this->x = x, this->y = y, this->z = z; }
 	
-	Vertex operator+(const Vertex &v){ return Vertex(x + v.x, y + v.y, z + v.z); };
+	Vertex operator+(const Vertex &v){ return Vertex(x + v.x, y + v.y, z + v.z); }
 
-	Vertex operator-(const Vertex &v){ return Vertex(x - v.x, y - v.y, z - v.z); };
+	Vector operator-(const Vertex &v){ return Vector(x - v.x, y - v.y, z - v.z); }
 
 	bool operator==(const Vertex &v){ return (x == v.x, y == v.y, z == v.z); }
 

@@ -40,12 +40,17 @@ class FObject
 
 		std::vector<Vertex>vertex;
 		std::vector<Vertex>oldPos;
-		std::vector<Polygon>face;
+
+		std::vector<Polygon*>face;
 		std::vector<NeighborList*>neighbours;
+
 		std::vector<Vector>velocity, oldVelocity;
 		std::vector<Vector>acceleration;
 		std::vector<Vector>force_external;
 		std::vector<Vector>force_internal;
+		std::vector<Vector>dep1;
+		std::vector<Vector>dep2;
+		std::vector<Vector>dep3;
 
 		Vertex center;
 		std::vector<float>distanceToCenter;
@@ -65,25 +70,9 @@ class FObject
 		void addVertex(Vertex v, Vector vel);
 		void addEdge(int v1, int v2);
 		void addFace(int v1, int v2, int v3);
-		
+		bool edgeExists(Edge edge);
 		void SetPosition(Vertex pos);
-		
-		
-		
-		
-		
-		
-		
-		
-		std::vector<Vertex>vertex;
-		std::vector<Vertex>oldPos;
 
-		Vertex center;
-
-		//math variables
-		glm::vec3 velocity;
-		float k; // Variable for elasticity
-		float mass;
 	private:
 
 };

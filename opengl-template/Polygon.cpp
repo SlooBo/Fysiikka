@@ -32,10 +32,10 @@ void Polygon::getOtherPoints(Vertex *vs[2], Vertex *v)
 }
 
 //not doned
-Vector Polygon::normal()
+Vector Polygon::Normal()
 {
-	//Vector vector1 = *vertex[1] - *vertex[0];
-	//Vector vector2 = *vertex[1] - *vertex[2];
+	Vector vector1 = *vertex[1] - *vertex[0];
+	Vector vector2 = *vertex[1] - *vertex[2];
 
-	//return vector2.CrossProduct(vector1).Normalize();
+	return vector2.CrossProduct(vector1).Normalize();
 }
