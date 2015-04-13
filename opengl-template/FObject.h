@@ -18,7 +18,7 @@ class FObject
 	public:
 		std::vector<Vertex>vertex;
 		std::vector<Vertex>oldPos;
-
+		glm::vec3 velocity;
 	private:
 
 };
