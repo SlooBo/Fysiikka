@@ -1,7 +1,10 @@
 #include "World.h"
+#include <time.h>
 
-
-World::World(){}
+World::World()
+{
+	t = clock();
+}
 
 
 World::~World(){}
@@ -9,11 +12,31 @@ World::~World(){}
 
 void World::Update()
 {
+	//DeltaTime start
+	calcDeltaTime();
 
+
+
+
+
+
+
+	//Move all the objects after the forces have been calculated.
+	for (int i = 0; i < objects.size(); i++)
+		Movement(objects[i]);
 }
 
+void World::calcDeltaTime()
+{
+	//deltaTime finish
+	t = clock() - t;
 
-void World::Acceleration(FObject obj)
+	deltaTime = ((float)t) / CLOCKS_PER_SEC;
+
+	t = clock();
+}
+
+void World::Movement(FObject obj)
 {
 	for (int i = 0; i < obj.vertex.size(); i++)
 	{
@@ -27,7 +50,7 @@ void World::Acceleration(FObject obj)
 	obj.velocity.x += gravity.x * deltaTime;
 }
 
-void Acceleration(FObject obj, float acceleration)
+void World::Acceleration(FObject obj, glm::vec3 acceleration)
 {
-
+	obj.velocity += acceleration * deltaTime;
 }
