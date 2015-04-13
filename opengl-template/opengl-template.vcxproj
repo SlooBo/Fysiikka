@@ -89,6 +89,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FObject.cpp" />
+    <ClCompile Include="NeighborList.cpp" />
+    <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="source\Application.cpp" />
     <ClCompile Include="source\Buffer.cpp" />
     <ClCompile Include="source\BufferState.cpp" />
@@ -116,6 +118,8 @@
     <ClInclude Include="include\opengl-template\EffectSource.h" />
     <ClInclude Include="include\opengl-template\Mesh.h" />
     <ClInclude Include="include\opengl-template\Texture.h" />
+    <ClInclude Include="NeighborList.h" />
+    <ClInclude Include="Polygon.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="World.h" />

@@ -54,6 +54,12 @@
     <ClCompile Include="World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Polygon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NeighborList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="FObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -104,6 +110,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Polygon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NeighborList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

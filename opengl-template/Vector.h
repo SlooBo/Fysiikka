@@ -8,7 +8,6 @@ class Vector
 public:
 	Vector();
 	Vector(float x, float y, float z);
-	~Vector();
 
 	static Vector ZeroVector;
 
