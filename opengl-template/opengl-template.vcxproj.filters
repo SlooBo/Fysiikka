@@ -51,6 +51,12 @@
     <ClCompile Include="Vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\vertex.glsl">
@@ -95,6 +101,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

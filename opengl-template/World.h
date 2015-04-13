@@ -13,7 +13,7 @@ public:
 private:
 	//Calculate the delta time since last call.
 	void calcDeltaTime();
-	//Calculates the movement with only gravity and previous forces.
+	//Calculates the movement with gravity and previous forces.
 	void Movement(FObject obj);
 	//Calculates the new velocity for the object.
 	void Acceleration(FObject obj, glm::vec3 acceleration);

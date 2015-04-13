@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FObject.cpp" />
     <ClCompile Include="source\Application.cpp" />
     <ClCompile Include="source\Buffer.cpp" />
     <ClCompile Include="source\BufferState.cpp" />
