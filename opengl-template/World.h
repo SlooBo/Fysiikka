@@ -8,6 +8,7 @@ public:
 	World();
 	~World();
 
+	void AddObject(FObject *obj);
 	void Update();
 
 private:
@@ -22,6 +23,6 @@ private:
 	clock_t t;
 	float deltaTime;
 	const glm::vec3 gravity = glm::vec3(0, -9.81, 0);
-	std::vector<FObject> objects;
+	std::vector<FObject*> objects;
 };
 

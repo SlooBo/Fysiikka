@@ -10,12 +10,17 @@ World::World()
 World::~World(){}
 
 
+void World::AddObject(FObject *obj)
+{
+	objects.push_back(obj);
+
+}
 void World::Update()
 {
 	//DeltaTime start
 	calcDeltaTime();
 
-
+	/// Calculate forces for each object.
 
 
 
@@ -23,7 +28,13 @@ void World::Update()
 
 	//Move all the objects after the forces have been calculated.
 	for (int i = 0; i < objects.size(); i++)
-		Movement(objects[i]);
+		Movement(*objects[i]);
+
+
+	//Draw everything
+	//for (int i = 0; i < objects.size(); i++)
+	//	Draw(*objects[i]);
+
 }
 
 void World::calcDeltaTime()
