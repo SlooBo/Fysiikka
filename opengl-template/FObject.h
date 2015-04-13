@@ -1,6 +1,5 @@
 #include <GL\glew.h>
 #include <GL\GL.h>
-
 #include "Vertex.h"
 #include "Vector.h"
 #include "NeighborList.h"
@@ -66,5 +65,25 @@ class FObject
 		void addVertex(Vertex v, Vector vel);
 		void addEdge(int v1, int v2);
 		void addFace(int v1, int v2, int v3);
+		
+		void SetPosition(Vertex pos);
+		
+		
+		
+		
+		
+		
+		
+		
+		std::vector<Vertex>vertex;
+		std::vector<Vertex>oldPos;
+
+		Vertex center;
+
+		//math variables
+		glm::vec3 velocity;
+		float k; // Variable for elasticity
+		float mass;
+	private:
 
 };

@@ -12,4 +12,7 @@
 *.user
 *.sdf
 opengl-template.sdf
+*.sdf
+opengl-template.opensdf
+opengl-template.sdf
 opengl-template.sdf
