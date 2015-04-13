@@ -150,7 +150,7 @@ Vector Vector::CrossProduct(const Vector &v)
 
 	vector.x = this->y * v.z - this->z * v.y;
 	vector.y = this->z * v.x - this->x * v.z;
-	vector.z = this->z * v.y * this->y * v.x;
+	vector.z = this->x * v.y * this->y * v.x;
 
 	return vector;
 }
