@@ -1,3 +1,5 @@
+#ifndef FOBJECT_H
+#define FOBJECT_H
 #include <GL\glew.h>
 #include <GL\GL.h>
 #include "Vertex.h"
@@ -76,3 +78,4 @@ class FObject
 	private:
 
 };
+#endif

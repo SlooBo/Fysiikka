@@ -1,4 +1,4 @@
-#include "NeighborList.h"
+#include "opengl-template\NeighborList.h"
 
 float NeighborList::deltaDistance(Vertex v, int i)
 {

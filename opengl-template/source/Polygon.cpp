@@ -1,4 +1,4 @@
-#include "Polygon.h"
+#include "opengl-template\Polygon.h"
 
 bool Polygon::isIn(Vertex *v)
 {

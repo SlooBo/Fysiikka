@@ -1,5 +1,7 @@
+#ifndef VERTEX_H
+#define VERTEX_H
 #include <GLM\glm.hpp>
-#include <vector>
+#include <opengl-template\Vector.h>
 
 class Vertex
 {
@@ -18,3 +20,4 @@ public:
 
 	float x, y, z;
 };
+#endif

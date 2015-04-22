@@ -21,17 +21,17 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\external\lodepng.cpp">
+      <Filter>Source Files\external</Filter>
+    </ClCompile>
     <ClCompile Include="source\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\Buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Main.cpp">
+    <ClCompile Include="source\BufferState.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\external\lodepng.cpp">
-      <Filter>Source Files\external</Filter>
     </ClCompile>
     <ClCompile Include="source\Effect.cpp">
       <Filter>Source Files</Filter>
@@ -39,28 +39,28 @@
     <ClCompile Include="source\EffectSource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\BufferState.cpp">
+    <ClCompile Include="source\FObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\Texture.cpp">
+    <ClCompile Include="source\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vector.cpp">
+    <ClCompile Include="source\NeighborList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="World.cpp">
+    <ClCompile Include="source\Polygon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Polygon.cpp">
+    <ClCompile Include="source\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NeighborList.cpp">
+    <ClCompile Include="source\Vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FObject.cpp">
+    <ClCompile Include="source\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -79,10 +79,7 @@
     <ClInclude Include="include\opengl-template\Buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\opengl-template\GLM.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\opengl-template\GL.h">
+    <ClInclude Include="include\opengl-template\BufferState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\opengl-template\Effect.h">
@@ -91,31 +88,34 @@
     <ClInclude Include="include\opengl-template\EffectSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\opengl-template\BufferState.h">
+    <ClInclude Include="include\opengl-template\FObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\opengl-template\Texture.h">
+    <ClInclude Include="include\opengl-template\GL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opengl-template\GLM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\opengl-template\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FObject.h">
+    <ClInclude Include="include\opengl-template\NeighborList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vertex.h">
+    <ClInclude Include="include\opengl-template\Polygon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vector.h">
+    <ClInclude Include="include\opengl-template\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="World.h">
+    <ClInclude Include="include\opengl-template\Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Polygon.h">
+    <ClInclude Include="include\opengl-template\Vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NeighborList.h">
+    <ClInclude Include="include\opengl-template\World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

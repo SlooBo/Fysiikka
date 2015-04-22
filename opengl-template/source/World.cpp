@@ -1,5 +1,4 @@
-#include "World.h"
-#include <time.h>
+#include "opengl-template\World.h"
 
 World::World()
 {

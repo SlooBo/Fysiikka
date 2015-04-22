@@ -88,41 +88,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FObject.cpp" />
-    <ClCompile Include="NeighborList.cpp" />
-    <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="source\Application.cpp" />
     <ClCompile Include="source\Buffer.cpp" />
     <ClCompile Include="source\BufferState.cpp" />
     <ClCompile Include="source\Effect.cpp" />
-    <ClCompile Include="source\external\lodepng.cpp" />
-    <ClCompile Include="source\Main.cpp" />
     <ClCompile Include="source\EffectSource.cpp" />
+    <ClCompile Include="source\external\lodepng.cpp" />
+    <ClCompile Include="source\FObject.cpp" />
+    <ClCompile Include="source\Main.cpp" />
     <ClCompile Include="source\Mesh.cpp" />
+    <ClCompile Include="source\NeighborList.cpp" />
+    <ClCompile Include="source\Polygon.cpp" />
     <ClCompile Include="source\Texture.cpp" />
-    <ClCompile Include="World.cpp" />
-    <ClCompile Include="Vector.cpp" />
+    <ClCompile Include="source\Vector.cpp" />
+    <ClCompile Include="source\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\fragment.glsl" />
     <None Include="assets\shaders\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FObject.h" />
     <ClInclude Include="include\opengl-template\Application.h" />
     <ClInclude Include="include\opengl-template\Buffer.h" />
     <ClInclude Include="include\opengl-template\BufferState.h" />
     <ClInclude Include="include\opengl-template\Effect.h" />
+    <ClInclude Include="include\opengl-template\EffectSource.h" />
+    <ClInclude Include="include\opengl-template\FObject.h" />
     <ClInclude Include="include\opengl-template\GL.h" />
     <ClInclude Include="include\opengl-template\GLM.h" />
-    <ClInclude Include="include\opengl-template\EffectSource.h" />
     <ClInclude Include="include\opengl-template\Mesh.h" />
+    <ClInclude Include="include\opengl-template\NeighborList.h" />
+    <ClInclude Include="include\opengl-template\Polygon.h" />
     <ClInclude Include="include\opengl-template\Texture.h" />
-    <ClInclude Include="NeighborList.h" />
-    <ClInclude Include="Polygon.h" />
-    <ClInclude Include="Vector.h" />
-    <ClInclude Include="Vertex.h" />
-    <ClInclude Include="World.h" />
+    <ClInclude Include="include\opengl-template\Vector.h" />
+    <ClInclude Include="include\opengl-template\Vertex.h" />
+    <ClInclude Include="include\opengl-template\World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

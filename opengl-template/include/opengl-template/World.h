@@ -1,6 +1,8 @@
-#pragma once
+#ifndef WORLD_H
+#define WORLD_H
 #include <vector>
 #include "FObject.h"
+#include <time.h>
 
 class World
 {
@@ -25,3 +27,4 @@ private:
 	const glm::vec3 gravity = glm::vec3(0, -9.81, 0);
 	std::vector<FObject*> objects;
 };
+#endif

@@ -1,4 +1,4 @@
-#include "Vector.h"
+#include "opengl-template\Vector.h"
 
 Vector Vector::ZeroVector(0, 0, 0);
 
@@ -7,10 +7,6 @@ Vector::Vector()
 	this->x = 0;
 	this->y = 0;
 	this->z = 0;
-}
-
-Vector::~Vector()
-{
 }
 
 Vector::Vector(float x, float y, float z)
