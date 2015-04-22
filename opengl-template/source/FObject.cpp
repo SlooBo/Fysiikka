@@ -1,5 +1,22 @@
 #include "opengl-template\FObject.h"
 
+bool Edge::operator==(const CollisionEdge& right)
+{
+	//if (this->v1 == right.vertex[])
+
+	return false;
+}
+
+bool Edge::operator==(const Edge& right)
+{
+	if (this == &right)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 FObject::FObject()
 {
 	Vertex v1(1, 5, 3);
