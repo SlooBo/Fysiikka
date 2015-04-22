@@ -39,6 +39,7 @@ class FObject
 {
 	public:
 		FObject();
+		~FObject();
 
 		std::vector<Vertex>vertex;
 		std::vector<Vertex>oldPos;

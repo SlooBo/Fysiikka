@@ -88,14 +88,14 @@ void World::DoWork()
 		for (i = 0; i < objects.size(); i++)
 			for (n = 0; n < objects.size(); n++)
 			{
-			Vertex k = objects[i]->getPosition();
-			Vertex j = objects[n]->getPosition();
+			Vertex k = objects[i]->GetPosition();
+			Vertex j = objects[n]->GetPosition();
 
-			if (i != n && (dist = objects[i]->getPosition().Distance(objects[n]->getPosition())) <=
-				(rad = objects[i]->getCDRadius() + objects[n]->getCDRadius()))
+			if (i != n && (dist = objects[i]->GetPosition().GetDistance(objects[n]->GetPosition())) <=
+				(rad = objects[i]->GetCDRadius() + objects[n]->GetCDRadius()))
 			{
 				// Do only if one of the objects is not fixed
-				if (!objects[i]->getFixed() || !objects[n]->getFixed())
+				if (!objects[i]->GetFixed() || !objects[n]->GetFixed())
 				{
 
 					if (objects[i]->CollisionDetected(*objects[n], collisionEdgesA, collisionPointB))
@@ -210,12 +210,12 @@ void World::DoWork()
 						//cout << "--------------------------" << endl;
 
 						for (int k = 0; k < (int)pointIndexI.size(); k++) {
-							objects[i]->setVelocity(k, Vector(/*0,0,0*/newVelIx, newVelIy, newVelIz));
+							objects[i]->SetVelocity(k, Vector(/*0,0,0*/newVelIx, newVelIy, newVelIz));
 							objects[i]->vertex[k] = objects[i]->oldPos[k];
 						}
 
 						for (int k = 0; k < (int)pointIndexII.size(); k++) {
-							objects[n]->setVelocity(k, Vector(/*0,0,0*/newVelIIx, newVelIIy, newVelIIz));
+							objects[n]->SetVelocity(k, Vector(/*0,0,0*/newVelIIx, newVelIIy, newVelIIz));
 							objects[n]->vertex[k] = objects[n]->oldPos[k];
 						}
 

@@ -16,7 +16,7 @@ public:
 
 	bool operator==(const Vertex &v){ return (x == v.x, y == v.y, z == v.z); }
 
-	float getDistance(Vertex& v){ return (float)glm::sqrt(glm::pow(x - v.x, 2) + glm::pow(y - v.y, 2) + glm::pow(z - v.z, 2)); }
+	float GetDistance(Vertex& v){ return (float)glm::sqrt(glm::pow(x - v.x, 2) + glm::pow(y - v.y, 2) + glm::pow(z - v.z, 2)); }
 
 	float x, y, z;
 };

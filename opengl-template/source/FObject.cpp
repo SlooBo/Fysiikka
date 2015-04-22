@@ -5,23 +5,6 @@
 #include <fstream>
 #include <algorithm>
 
-bool Edge::operator==(const CollisionEdge& right)
-{
-	//if (this->v1 == right.vertex[])
-
-	return false;
-}
-
-bool Edge::operator==(const Edge& right)
-{
-	if (this == &right)
-	{
-		return true;
-	}
-
-	return false;
-}
-
 FObject::FObject()
 {
 	Vertex v1(1, 5, 3);
@@ -77,6 +60,7 @@ void FObject::AddEdge(int v1, int v2)
 	}	
 }
 
+
 bool FObject::EdgeExists(Edge edge)
 {
 	for (int i = 0; i < eStart; i++)
@@ -88,7 +72,6 @@ bool FObject::EdgeExists(Edge edge)
 	}
 	return false;
 }
-
 void FObject::AddFace(int v1, int v2, int v3)
 {
 	Polygon *polygon = new Polygon;
@@ -103,22 +86,22 @@ void FObject::AddFace(int v1, int v2, int v3)
 
 	face.push_back(polygon);
 
-	neighbours[v1]->add(&vertex[v2], &vertex[v1], v2);
-	neighbours[v1]->add(&vertex[v3], &vertex[v1], v3);
+	neighbours[v1]->Add(&vertex[v2], &vertex[v1], v2);
+	neighbours[v1]->Add(&vertex[v3], &vertex[v1], v3);
 	Vector vector1 = vertex[v2] - vertex[v1];
 	Vector vector2 = vertex[v3] - vertex[v1];
 
 	//todo distances
 
-	neighbours[v2]->add(&vertex[v1], &vertex[v2], v1);
-	neighbours[v2]->add(&vertex[v3], &vertex[v2], v3);
+	neighbours[v2]->Add(&vertex[v1], &vertex[v2], v1);
+	neighbours[v2]->Add(&vertex[v3], &vertex[v2], v3);
 	vector1 = vertex[v1] - vertex[v2];
 	vector2 = vertex[v3] - vertex[v2];
 
 	//distances
 
-	neighbours[v3]->add(&vertex[v1], &vertex[v3], v1);
-	neighbours[v3]->add(&vertex[v2], &vertex[v3], v2);
+	neighbours[v3]->Add(&vertex[v1], &vertex[v3], v1);
+	neighbours[v3]->Add(&vertex[v2], &vertex[v3], v2);
 	vector1 = vertex[v1] - vertex[v3];
 	vector2 = vertex[v2] - vertex[v3];
 
@@ -156,29 +139,6 @@ void FObject::SetExAcceleration(int i, Vector v) {
 		force_external[i] = v;
 }
 
-void FObject::AddEdge(int p1, int p2)
-{
-	Edge e;
-
-	e.v1 = &vertex[p1];
-	e.v2 = &vertex[p2];
-
-	if (!EdgeExists(e))
-	{
-		edges[eStart] = e;
-
-		eStart++;
-
-	}
-}
-
-bool FObject::EdgeExists(Edge e)
-{
-	for (int i = 0; i < eStart; i++)
-		if (edges[i] == e) return true;
-	return false;
-}
-
 void FObject::BuildDone() {
 	float x = 0, y = 0, z = 0;
 
@@ -198,9 +158,9 @@ void FObject::BuildDone() {
 
 	cdRadius = 0;
 	for (int i = 0; i < (int)vertex.size(); i++) {
-		distanceToCenter.push_back(center.Distance(vertex[i]));
-		if (cdRadius < center.Distance(vertex[i]))
-			cdRadius = center.Distance(vertex[i]);
+		distanceToCenter.push_back(center.GetDistance(vertex[i]));
+		if (cdRadius < center.GetDistance(vertex[i]))
+			cdRadius = center.GetDistance(vertex[i]);
 	}
 
 }
@@ -247,17 +207,17 @@ void FObject::Update() {
 
 	for (i = 0; i < (int)vertex.size(); i++) {
 		Vector totalF(0, 0, 0);
-		for (int j = 0; j < (int)depend[i]->points.size(); j++) {
-			float delta = depend[i]->deltaDist(vertex[i], j);
-			float ratio = depend[i]->ratioDist(vertex[i], j);
+		for (int j = 0; j < (int)neighbours[i]->vertexes.size(); j++) {
+			float delta = neighbours[i]->DeltaDistance(vertex[i], j);
+			float ratio = neighbours[i]->RatioDistance(vertex[i], j);
 
-			Vector deltaVel = velocity[i] - velocity[depend[i]->index[j]];
-			Vector deltaPos = vertex[i] - vertex[depend[i]->index[j]];
+			Vector deltaVel = velocity[i] - velocity[neighbours[i]->indexes[j]];
+			Vector deltaPos = vertex[i] - vertex[neighbours[i]->indexes[j]];
 
 			if (!(0.0001 > delta && delta > -0.0001)) {
-				Vector direct(((depend[i]->points[j]->x) - vertex[i].x),
-					((depend[i]->points[j]->y) - vertex[i].y),
-					((depend[i]->points[j]->z) - vertex[i].z));
+				Vector direct(((neighbours[i]->vertexes[j]->x) - vertex[i].x),
+					((neighbours[i]->vertexes[j]->y) - vertex[i].y),
+					((neighbours[i]->vertexes[j]->z) - vertex[i].z));
 
 				direct = direct.Normalize();
 
@@ -272,7 +232,7 @@ void FObject::Update() {
 
 		}
 
-		float delta = center.Distance(vertex[i]) - distanceToCenter[i];
+		float delta = center.GetDistance(vertex[i]) - distanceToCenter[i];
 		Vector deltaVel = velocity[i] - centerVel; // - velocity[depend[i]->index[j]];
 		Vector deltaPos = vertex[i] - center;
 		/*
@@ -337,9 +297,9 @@ void FObject::Update() {
 
 	cdRadius = 0;
 	for (int i = 0; i < (int)vertex.size(); i++) {
-		distanceToCenter.push_back(center.Distance(vertex[i]));
-		if (cdRadius < center.Distance(vertex[i]))
-			cdRadius = center.Distance(vertex[i]);
+		distanceToCenter.push_back(center.GetDistance(vertex[i]));
+		if (cdRadius < center.GetDistance(vertex[i]))
+			cdRadius = center.GetDistance(vertex[i]);
 	}
 
 }
@@ -385,7 +345,7 @@ bool FObject::CollisionDetected(FObject &o, std::vector<CollisionEdge> &collisio
 		for (j = 0; j < (int)o.face.size(); j++)
 		{
 			N = o.face[j]->normal;
-			distance = N * ((*o.face[j]->point[0]) - Vertex(0, 0, 0));
+			distance = N * ((*o.face[j]->vertex[0]) - Vertex(0, 0, 0));
 			distance = 0 - distance;
 			e1_p = N * e1 + distance;
 			e2_p = N * e2 + distance;
@@ -401,9 +361,9 @@ bool FObject::CollisionDetected(FObject &o, std::vector<CollisionEdge> &collisio
 
 				// If the edge is against the edge of the plane then force a collision
 				// detection on it.
-				if (pointToCheck == *o.face[j]->point[0] ||
-					pointToCheck == *o.face[j]->point[1] ||
-					pointToCheck == *o.face[j]->point[2])
+				if (pointToCheck == *o.face[j]->vertex[0] ||
+					pointToCheck == *o.face[j]->vertex[1] ||
+					pointToCheck == *o.face[j]->vertex[2])
 					angle = 360.0f;
 				else
 				{
@@ -411,8 +371,8 @@ bool FObject::CollisionDetected(FObject &o, std::vector<CollisionEdge> &collisio
 
 					for (int l = 2, k = 0; k < 3; l = k++)
 					{
-						int new_angle = ((*(o.face[j]->point[k])) - pointToCheck).Angle(
-							((*o.face[j]->point[l]) - pointToCheck));
+						int new_angle = ((*(o.face[j]->vertex[k])) - pointToCheck).Angle(
+							((*o.face[j]->vertex[l]) - pointToCheck));
 
 						angle += new_angle;
 					}
@@ -428,8 +388,8 @@ bool FObject::CollisionDetected(FObject &o, std::vector<CollisionEdge> &collisio
 					// through to the outside of the object, then we will mark
 					// this edge as a "non interior" edge and completey ignore it
 					// when running DFS.
-					cEdge->point[0] = &(*edges[i].v1);
-					cEdge->point[1] = &(*edges[i].v2);
+					cEdge->vertex[0] = &(*edges[i].v1);
+					cEdge->vertex[1] = &(*edges[i].v2);
 
 
 					edgeVector1 = Vector(edges[i].v1->x - edges[i].v2->x,
@@ -459,8 +419,8 @@ bool FObject::CollisionDetected(FObject &o, std::vector<CollisionEdge> &collisio
 					for (int i = 0; i < 3; i++)
 					{
 						if (find(collisionPoints.begin(), collisionPoints.end(),
-							*o.face[j]->point[i]) == collisionPoints.end())
-							collisionPoints.push_back(*o.face[j]->point[i]);
+							*o.face[j]->vertex[i]) == collisionPoints.end())
+							collisionPoints.push_back(*o.face[j]->vertex[i]);
 					}
 				}
 			}
@@ -489,8 +449,8 @@ void FObject::DFS(std::vector<CollisionEdge> &collisionEdges, std::vector<Vertex
 	{
 		if (collisionEdges[i].interior)
 		{
-			collisionPoints.push_back(*collisionEdges[i].point[(collisionEdges[i].collisionIdx + 1) % 2]);
-			DFSRec(*collisionEdges[i].point[collisionEdges[i].collisionIdx], collisionPoints);
+			collisionPoints.push_back(*collisionEdges[i].vertex[(collisionEdges[i].collisionIdx + 1) % 2]);
+			DFSRec(*collisionEdges[i].vertex[collisionEdges[i].collisionIdx], collisionPoints);
 		}
 	}
 }
@@ -530,20 +490,20 @@ bool Edge::operator ==(const Edge &e)
 
 bool Edge::operator ==(const CollisionEdge &e)
 {
-	return (e.point[0]->x == v1->x) && (e.point[0]->y == v1->y) && (e.point[0]->z == v1->z) &&
-		(e.point[1]->x == v2->x) && (e.point[1]->y == v2->y) && (e.point[1]->z == v2->z);
+	return (e.vertex[0]->x == v1->x) && (e.vertex[0]->y == v1->y) && (e.vertex[0]->z == v1->z) &&
+		(e.vertex[1]->x == v2->x) && (e.vertex[1]->y == v2->y) && (e.vertex[1]->z == v2->z);
 }
 
 // NEW
 bool CollisionEdge::operator==(const CollisionEdge &e)
 {
-	return (e.point[0]->x == point[0]->x) && (e.point[0]->y == point[0]->y) && (e.point[0]->z == point[0]->z) &&
-		(e.point[1]->x == point[1]->x) && (e.point[1]->y == point[1]->y) && (e.point[1]->z == point[1]->z);
+	return (e.vertex[0]->x == vertex[0]->x) && (e.vertex[0]->y == vertex[0]->y) && (e.vertex[0]->z == vertex[0]->z) &&
+		(e.vertex[1]->x == vertex[1]->x) && (e.vertex[1]->y == vertex[1]->y) && (e.vertex[1]->z == vertex[1]->z);
 }
 
 // NEW
 bool CollisionEdge::operator==(const Edge &e)
 {
-	return (e.v1->x == point[0]->x) && (e.v1->y == point[0]->y) && (e.v1->z == point[0]->z) &&
-		(e.v2->x == point[1]->x) && (e.v2->y == point[1]->y) && (e.v2->z == point[1]->z);
+	return (e.v1->x == vertex[0]->x) && (e.v1->y == vertex[0]->y) && (e.v1->z == vertex[0]->z) &&
+		(e.v2->x == vertex[1]->x) && (e.v2->y == vertex[1]->y) && (e.v2->z == vertex[1]->z);
 }
