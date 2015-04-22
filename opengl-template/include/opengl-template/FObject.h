@@ -6,6 +6,14 @@
 #include "Vector.h"
 #include "NeighborList.h"
 #include "Polygon.h"
+#include <memory>
+
+//For Drawing
+#include "Effect.h"
+#include "Buffer.h"
+#include "BufferState.h"
+
+using namespace OpenGLTemplate;
 
 class CollisionEdge;
 
@@ -38,7 +46,13 @@ public:
 class FObject
 {
 	public:
-		FObject();
+		//Use this one for creating FObjects
+		static std::shared_ptr<FObject> CreateFObject(const std::shared_ptr<Effect>& effect);
+		
+		//Dont use this one
+		FObject(const std::vector<float>& vertices,
+			const std::vector<unsigned int>& indices, 
+			const std::shared_ptr<Effect>& effect);
 		~FObject();
 
 		std::vector<Vertex>vertex;
@@ -68,6 +82,10 @@ class FObject
 
 		Vector gravity;
 
+
+		void Draw();
+
+
 		float edge(Vertex v1, Vertex v2);
 
 		void AddVertex(Vertex v, Vector vel);
@@ -88,5 +106,11 @@ class FObject
 			std::vector<Vertex> &collisionPoints) const;
 		void DFS(std::vector<CollisionEdge> &collisionEdges, std::vector<Vertex> &collisionPoints);
 		void FObject::DFSRec(Vertex &p, std::vector<Vertex> &collisionPoints);
+private:
+
+	std::shared_ptr<Effect> _effect;
+	Buffer _vertexBuffer;
+	Buffer _indexBuffer;
+	BufferState _bufferState;
 };
 #endif

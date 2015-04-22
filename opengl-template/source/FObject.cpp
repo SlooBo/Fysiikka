@@ -5,26 +5,68 @@
 #include <fstream>
 #include <algorithm>
 
-FObject::FObject()
+using namespace OpenGLTemplate;
+
+void FObject::Draw()
 {
-	Vertex v1(1, 5, 3);
-	Vertex v2(2, 4.5, 3);
-	Vertex v3(3, 5, 3);
-	Vertex v4(2, 3, 2);	
+	_effect->apply();
+	_bufferState.apply();
 
-	AddVertex(v1, Vector(0, 0, 0));
-	AddVertex(v2, Vector(0, 0, 0));
-	AddVertex(v3, Vector(0, 0, 0));
-	AddVertex(v4, Vector(0, 0, 0));
+	glDrawElements(GL_TRIANGLES, _indexBuffer.elementCount(), GL_UNSIGNED_INT, reinterpret_cast<void*>(0));
+
+	_bufferState.unapply();
+	_effect->unapply();
+
+}
+
+std::shared_ptr<FObject> FObject::CreateFObject(const std::shared_ptr<Effect>& effect)
+{
+	std::vector<float> vertices;
+	std::vector<unsigned int> indices;
+
+	////TODO IMPORTANT SHIT
+	/*
+		vertexi data pit‰‰ teh‰ normi floatteina  ett‰ sen voi antaa buffereille ensin.
+		indicet kanssa perus unsigned inttein‰.
+	*/
+
+	FObject* obj = new FObject(vertices, indices, effect);
+	return std::shared_ptr<FObject>(obj);
+}
+//Dont use this one.
+FObject::FObject(const std::vector<float>& vertices, const std::vector<unsigned int>& indices, const std::shared_ptr<Effect>& effect)
+	:_vertexBuffer(vertices.size(), sizeof(float), BufferType::Vertex, BufferUsage::DrawDynamic),
+	_indexBuffer(indices.size(), sizeof(unsigned int), BufferType::Index, BufferUsage::DrawDynamic),
+	_effect(effect)
+{
+
+	//Create data for drawing.
+	_vertexBuffer.setData(vertices);
+	_indexBuffer.setData(indices);
+	VertexFormat vertexFormat{
+		{ 0u, 3u, VertexElementType::Float32, GL_FALSE }
+	};
+	_bufferState.initialise(vertexFormat, &_vertexBuffer, &_indexBuffer);
+
+	///// TODO IMPORTANT SHIT
+	/*
+		construct the real FObject here with the own functions
+		use the data from vertices and indices
 	
-	AddFace(2, 1, 0);
-	AddFace(0, 1, 3);
-	AddFace(3, 1, 2);
-	AddFace(0, 3, 2);
+		you know what to do... GO!
+	
+		Mik‰‰n ei toimi koskaan miss‰‰n ennenkuin t‰‰ on tehty
 
-	gravity = Vector(0, -10, 0);
 
+		Pit‰‰ lis‰t‰ viel updateen sitten se ett‰ kun siel muuttuu vertexi data niin...
+		se sitten asetetaan myˆs buffereille uudestaan k‰ytt‰en tuota _vertexBuffer.setData()aaaa
+	*/
+
+
+
+	gravity = Vector(0, -9.81, 0);
 	mass = vertex.size();
+
 }
 
 void FObject::AddVertex(Vertex v, Vector vel)
