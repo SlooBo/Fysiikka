@@ -86,6 +86,6 @@ class FObject
 		bool CollisionDetected(FObject &o, std::vector<CollisionEdge> &collisionEdges,
 			std::vector<Vertex> &collisionPoints) const;
 		void DFS(std::vector<CollisionEdge> &collisionEdges, std::vector<Vertex> &collisionPoints);
-		void FObject::DFSRec(Vertex &p, std::vector<Vertex> &collisionPoints)
+		void FObject::DFSRec(Vertex &p, std::vector<Vertex> &collisionPoints);
 };
 #endif
