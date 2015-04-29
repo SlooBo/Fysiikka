@@ -29,6 +29,9 @@
 #include <opengl-template/Mesh.h>
 #include <opengl-template/Texture.h>
 
+#include "FObject.h"
+#include "World.h"
+
 namespace Config
 {
 	const int WINDOW_WIDTH = 1280;
@@ -58,6 +61,8 @@ namespace OpenGLTemplate
 		std::shared_ptr<BufferState> _bufferState;
 		GLuint _worldTransformLocation;
 		GLfloat _rotation;
+		
+		World world;
 
 		Application(const Application& application) = delete;
 		Application(Application&& application) = delete;

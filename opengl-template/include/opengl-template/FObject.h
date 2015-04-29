@@ -7,6 +7,7 @@
 #include "NeighborList.h"
 #include "Polygon.h"
 #include <memory>
+#include "Mesh.h"
 
 //For Drawing
 #include "Effect.h"
@@ -46,8 +47,9 @@ public:
 class FObject
 {
 	public:
+		FObject(const FObject &);
 		//Use this one for creating FObjects
-		static std::shared_ptr<FObject> CreateFObject(const std::shared_ptr<Effect>& effect);
+		static std::shared_ptr<FObject> CreateFObject(const std::shared_ptr<Effect>& effect, Mesh& _mesh);
 		
 		//Dont use this one
 		FObject(const std::vector<float>& vertices,
@@ -79,7 +81,8 @@ class FObject
 		float cdRadius;
 
 		int eSize, eStart;
-
+		float averageDistance;
+		int numberEdges;
 		Vector gravity;
 
 
@@ -108,6 +111,7 @@ class FObject
 		void FObject::DFSRec(Vertex &p, std::vector<Vertex> &collisionPoints);
 private:
 
+	std::shared_ptr<Mesh>_mesh;
 	std::shared_ptr<Effect> _effect;
 	Buffer _vertexBuffer;
 	Buffer _indexBuffer;

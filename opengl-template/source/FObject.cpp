@@ -7,11 +7,15 @@
 
 using namespace OpenGLTemplate;
 
+FObject::FObject(const FObject &)
+{
+
+}
 void FObject::Draw()
 {
 	_effect->apply();
 	_bufferState.apply();
-
+	
 	glDrawElements(GL_TRIANGLES, _indexBuffer.elementCount(), GL_UNSIGNED_INT, reinterpret_cast<void*>(0));
 
 	_bufferState.unapply();
@@ -19,18 +23,17 @@ void FObject::Draw()
 
 }
 
-std::shared_ptr<FObject> FObject::CreateFObject(const std::shared_ptr<Effect>& effect)
+std::shared_ptr<FObject> FObject::CreateFObject(const std::shared_ptr<Effect>& effect, Mesh& _mesh)
 {
 	std::vector<float> vertices;
 	std::vector<unsigned int> indices;
 
 	////TODO IMPORTANT SHIT
 	/*
-		vertexi data pit‰‰ teh‰ normi floatteina  ett‰ sen voi antaa buffereille ensin.
-		indicet kanssa perus unsigned inttein‰.
+		jos tarvitaan muuta meshi dataa jatkossa niin hae se t‰‰ll‰ ja p‰ivit‰ constructoria...
 	*/
-
-	FObject* obj = new FObject(vertices, indices, effect);
+	
+	FObject* obj = new FObject(_mesh.getVertices(), _mesh.getIndices(), effect);
 	return std::shared_ptr<FObject>(obj);
 }
 //Dont use this one.
@@ -43,10 +46,36 @@ FObject::FObject(const std::vector<float>& vertices, const std::vector<unsigned 
 	//Create data for drawing.
 	_vertexBuffer.setData(vertices);
 	_indexBuffer.setData(indices);
-	VertexFormat vertexFormat{
+	
+	eStart = 0;
+	averageDistance = 0;
+	numberEdges = 0;
+	k = 0;
+
+	VertexFormat vertexFormat
+	{
 		{ 0u, 3u, VertexElementType::Float32, GL_FALSE }
 	};
 	_bufferState.initialise(vertexFormat, &_vertexBuffer, &_indexBuffer);
+
+	int numberVertices = vertices.size();
+	int numberIndices = indices.size();
+	int numberFaces = numberIndices / 3;
+
+	eSize = numberFaces * 3 / 2;
+
+	edges = new Edge[eSize];
+
+	for (int i = 0; i < vertices.size() / 3; i++)
+	{
+		Vertex v(vertices[i*3], vertices[i*3+1], vertices[i*3+2]);
+		AddVertex(v, Vector(0, 0, 0) );
+	}
+
+	for (int i = 0; i < indices.size() / 3; i++)
+	{
+		AddFace(indices[i * 3], indices[i * 3 + 1], indices[i * 3 + 2]);
+	}
 
 	///// TODO IMPORTANT SHIT
 	/*
@@ -61,8 +90,8 @@ FObject::FObject(const std::vector<float>& vertices, const std::vector<unsigned 
 		Pit‰‰ lis‰t‰ viel updateen sitten se ett‰ kun siel muuttuu vertexi data niin...
 		se sitten asetetaan myˆs buffereille uudestaan k‰ytt‰en tuota _vertexBuffer.setData()aaaa
 	*/
-
-
+	BuildDone();
+	averageDistance = averageDistance / numberEdges;
 
 	gravity = Vector(0, -9.81, 0);
 	mass = vertex.size();
@@ -116,6 +145,7 @@ bool FObject::EdgeExists(Edge edge)
 }
 void FObject::AddFace(int v1, int v2, int v3)
 {
+
 	Polygon *polygon = new Polygon;
 	polygon->vertex[0] = &vertex[v1];
 	polygon->vertex[1] = &vertex[v2];
@@ -132,7 +162,10 @@ void FObject::AddFace(int v1, int v2, int v3)
 	neighbours[v1]->Add(&vertex[v3], &vertex[v1], v3);
 	Vector vector1 = vertex[v2] - vertex[v1];
 	Vector vector2 = vertex[v3] - vertex[v1];
-
+	
+	averageDistance += ~v1;
+	averageDistance += ~v2;
+	numberEdges += 2;
 	//todo distances
 
 	neighbours[v2]->Add(&vertex[v1], &vertex[v2], v1);
@@ -140,6 +173,9 @@ void FObject::AddFace(int v1, int v2, int v3)
 	vector1 = vertex[v1] - vertex[v2];
 	vector2 = vertex[v3] - vertex[v2];
 
+	averageDistance += ~v1;
+	averageDistance += ~v2;
+	numberEdges += 2;
 	//distances
 
 	neighbours[v3]->Add(&vertex[v1], &vertex[v3], v1);
@@ -147,6 +183,9 @@ void FObject::AddFace(int v1, int v2, int v3)
 	vector1 = vertex[v1] - vertex[v3];
 	vector2 = vertex[v2] - vertex[v3];
 
+	averageDistance += ~v1;
+	averageDistance += ~v2;
+	numberEdges += 2;
 }
 
 void FObject::SetPosition(Vertex p)

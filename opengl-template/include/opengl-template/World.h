@@ -10,7 +10,7 @@ public:
 	World();
 	~World();
 
-	void AddObject(FObject *obj);
+	void AddObject(	std::shared_ptr<FObject> _fobject);
 	void DoWork();
 	void Update();
 
@@ -27,6 +27,6 @@ private:
 	float deltaTime;
 	float time_elapsed;
 	const glm::vec3 gravity = glm::vec3(0, -9.81, 0);
-	std::vector<FObject*> objects;
+	std::vector<std::shared_ptr<FObject>> objects;
 };
 #endif

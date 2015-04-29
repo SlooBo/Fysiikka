@@ -73,14 +73,14 @@ namespace OpenGLTemplate
 
 		void unapply() const;
 
+		BufferState(const BufferState& drawState) = delete;
+		BufferState(BufferState&& drawState) = delete;
+
 	private:
 
 		unsigned int _vertexArray;
 		bool _isInitialised;
 		
-		BufferState(const BufferState& drawState) = delete;
-		BufferState(BufferState&& drawState) = delete;
-
 		void createVertexArray();
 		void initialiseVertexArray(const VertexFormat& vertexFormat);
 		void apply(const unsigned int vertexArray) const;

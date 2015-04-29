@@ -50,12 +50,16 @@ namespace OpenGLTemplate
 	public:
 
 		void draw() const;
-
+		std::vector<float> getVertices();
+		std::vector<unsigned int> getIndices();
 		static std::shared_ptr<Mesh> load(const std::string& filepath, const std::shared_ptr<Effect>& effect,
 			const TextureMaps& textureMaps);
 
-	private:
+		void addPosVertices(std::vector<float>pos, std::vector<unsigned int> ind);
 
+	private:
+		std::vector<float>posVertices;
+		std::vector<unsigned int>posIndices;
 		Buffer _vertexBuffer;
 		Buffer _indexBuffer;
 		BufferState _bufferState;

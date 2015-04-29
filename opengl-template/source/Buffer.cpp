@@ -25,6 +25,11 @@ using namespace std;
 
 // Public
 
+Buffer::Buffer()
+{
+
+}
+
 Buffer::Buffer(const unsigned int elementCount, const unsigned int elementSize, const BufferType& type,
 	const BufferUsage& usage)
 	: _buffer(0u),

@@ -42,6 +42,8 @@ void Mesh::draw() const
 	_effect->unapply();
 }
 
+
+
 // Static
 
 shared_ptr<Mesh> Mesh::load(const string& filepath, const shared_ptr<Effect>& effect,
@@ -81,6 +83,8 @@ shared_ptr<Mesh> Mesh::load(const string& filepath, const shared_ptr<Effect>& ef
 		vertexComponents |= VertexComponents::TangentsAndBitangents;
 	}
 
+	std::vector<float>pos(3u * mesh->mNumVertices);
+
 	vector<float> vertices(vertexSize * mesh->mNumVertices);
 	vector<unsigned int> indices;
 	indices.reserve(3u * mesh->mNumFaces);
@@ -98,6 +102,10 @@ shared_ptr<Mesh> Mesh::load(const string& filepath, const shared_ptr<Effect>& ef
 			vertices[vertexSize * index + 1u] = mesh->mVertices[index].y;
 			vertices[vertexSize * index + 2u] = mesh->mVertices[index].z;
 			unsigned int offset = 3u;
+
+			pos[3u * index] = mesh->mVertices[index].x;
+			pos[3u * index + 1u] = mesh->mVertices[index].y;
+			pos[3u * index + 2u] = mesh->mVertices[index].z;
 
 			if(meshHasTextureCoords)
 			{
@@ -128,10 +136,26 @@ shared_ptr<Mesh> Mesh::load(const string& filepath, const shared_ptr<Effect>& ef
 
 	Mesh* ogltMesh = new Mesh(vertices, indices, vertexComponents, effect, textureMaps);
 	// TODO: add 'loaded' log entry
-
+	
+	ogltMesh->addPosVertices(pos, indices);
 	return shared_ptr<Mesh>(ogltMesh);
 }
 
+void Mesh::addPosVertices(std::vector<float>pos, std::vector<unsigned int> ind)
+{
+	posVertices = pos;
+	posIndices = ind;
+}
+
+std::vector<float> Mesh::getVertices()
+{
+	return posVertices;
+}
+
+std::vector<unsigned int> Mesh::getIndices()
+{
+	return posIndices;
+}
 // Private
 
 Mesh::Mesh(const std::vector<float>& vertices, const std::vector<unsigned int>& indices,

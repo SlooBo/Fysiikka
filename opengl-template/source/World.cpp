@@ -4,6 +4,7 @@
 
 World::World()
 {
+	time_elapsed = 0;
 	t = clock();
 }
 
@@ -11,9 +12,9 @@ World::World()
 World::~World(){}
 
 
-void World::AddObject(FObject *obj)
+void World::AddObject(std::shared_ptr<FObject> _fobject)
 {
-	objects.push_back(obj);
+	objects.push_back(_fobject);
 
 }
 void World::Update()
@@ -21,21 +22,12 @@ void World::Update()
 	//DeltaTime start
 	calcDeltaTime();
 
-	/// Calculate forces for each object.
+	DoWork();
 
-
-
-
-
-	//Move all the objects after the forces have been calculated.
 	for (int i = 0; i < objects.size(); i++)
-		Movement(*objects[i]);
-
-
-	//Draw everything
-	//for (int i = 0; i < objects.size(); i++)
-	//	Draw(*objects[i]);
-
+	{
+		objects[i]->Draw();
+	}
 }
 
 void World::calcDeltaTime()
@@ -76,7 +68,7 @@ void World::DoWork()
 	float rad, dist;
 	calcDeltaTime();
 
-	if ((time_elapsed = deltaTime) >= 4)
+	if ((time_elapsed += deltaTime) >= .01)
 	{
 
 		for (i = 0; i < objects.size(); i++)

@@ -48,7 +48,7 @@ Application::Application()
 	assert(location != -1);
 	glUniformMatrix4fv(location, 1, GL_FALSE, value_ptr(transform));
 
-	transform = translate(vec3(0.0f, 0.0f, -100.0f));
+	transform = translate(vec3(0.0f, 0.0f, -10.0f));
 	location = _effect->getUniformLocation("unifViewTransform");
 	assert(location != -1);
 	glUniformMatrix4fv(location, 1, GL_FALSE, value_ptr(transform));
@@ -65,7 +65,9 @@ Application::Application()
 	textureMaps.diffuse = Texture::load(TextureType::Texture2D, "assets/textures/texture.png");
 
 	// Add a model file to the path below
-	_mesh = Mesh::load("assets/models/model.dae", _effect, textureMaps);
+	_mesh = Mesh::load("assets/models/cube.dae", _effect, textureMaps);
+
+	world.AddObject(FObject::CreateFObject(_effect, *_mesh));
 
 	glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
 	glEnable(GL_CULL_FACE);
@@ -88,5 +90,5 @@ void Application::update()
 	const mat4 worldTransform = rotate(_rotation, vec3(0.0f, 1.0f, 0.0f));
 	glUniformMatrix4fv(_worldTransformLocation, 1, GL_FALSE, value_ptr(worldTransform));
 
-	_mesh->draw();
+	world.Update();
 }

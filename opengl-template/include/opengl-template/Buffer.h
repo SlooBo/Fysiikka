@@ -42,6 +42,7 @@ namespace OpenGLTemplate
 	class Buffer final
 	{
 	public:
+		Buffer();
 
 		Buffer(const unsigned int elementCount, const unsigned int elementSize, const BufferType& type,
 			const BufferUsage& usage);
@@ -57,6 +58,8 @@ namespace OpenGLTemplate
 
 		void unapply() const;
 
+		Buffer(const Buffer& buffer) = delete;
+		Buffer(Buffer&& buffer) = delete;
 	private:
 
 		unsigned int _buffer;
@@ -64,8 +67,6 @@ namespace OpenGLTemplate
 		unsigned int _elementSize;
 		BufferType _type;
 
-		Buffer(const Buffer& buffer) = delete;
-		Buffer(Buffer&& buffer) = delete;
 
 		void createBuffer();
 		void initialiseStorage(const BufferUsage& usage) const;
