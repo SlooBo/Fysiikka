@@ -166,7 +166,6 @@ void FObject::AddFace(int v1, int v2, int v3)
 	averageDistance += ~v1;
 	averageDistance += ~v2;
 	numberEdges += 2;
-	//todo distances
 
 	neighbours[v2]->Add(&vertex[v1], &vertex[v2], v1);
 	neighbours[v2]->Add(&vertex[v3], &vertex[v2], v3);
@@ -176,7 +175,6 @@ void FObject::AddFace(int v1, int v2, int v3)
 	averageDistance += ~v1;
 	averageDistance += ~v2;
 	numberEdges += 2;
-	//distances
 
 	neighbours[v3]->Add(&vertex[v1], &vertex[v3], v1);
 	neighbours[v3]->Add(&vertex[v2], &vertex[v3], v2);
