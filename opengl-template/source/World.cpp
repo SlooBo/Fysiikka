@@ -20,7 +20,7 @@ void World::AddObject(std::shared_ptr<FObject> _fobject)
 void World::Update()
 {
 	//DeltaTime start
-	calcDeltaTime();
+	//calcDeltaTime();
 
 	DoWork();
 
@@ -67,8 +67,8 @@ void World::DoWork()
 	unsigned int i, n;
 	float rad, dist;
 	calcDeltaTime();
-
-	if ((time_elapsed += deltaTime) >= .01)
+	time_elapsed += deltaTime;
+	if (time_elapsed >= 4)
 	{
 
 		for (i = 0; i < objects.size(); i++)
@@ -215,5 +215,6 @@ void World::DoWork()
 				}
 			}
 			}
+			time_elapsed = 0;
 	}
 }
