@@ -68,13 +68,13 @@ void World::DoWork()
 	float rad, dist;
 	calcDeltaTime();
 	time_elapsed += deltaTime;
-	if (time_elapsed >= 4)
+	if (time_elapsed >= 1)
 	{
 
 		for (i = 0; i < objects.size(); i++)
 		{
 			//TODO
-			//objects[i]->Update();
+			objects[i]->Update();
 		}
 
 		for (i = 0; i < objects.size(); i++)
