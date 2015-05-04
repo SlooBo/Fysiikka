@@ -92,8 +92,8 @@ class FObject
 		float edge(Vertex v1, Vertex v2);
 
 		void AddVertex(Vertex v, Vector vel);
-		void AddEdge(float v1, float v2);
-		void AddFace(float v1, float v2, float v3);
+		void AddEdge(int v1, int v2);
+		void AddFace(int v1, int v2, int v3);
 		bool EdgeExists(Edge edge);
 		void SetPosition(Vertex pos);
 		void SetVelocity(int i, Vector v);

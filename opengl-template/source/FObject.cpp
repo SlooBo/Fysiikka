@@ -116,7 +116,7 @@ void FObject::AddVertex(Vertex v, Vector vel)
 	dep3.push_back(Vector(0, 0, 0));
 }
 
-void FObject::AddEdge(float v1, float v2)
+void FObject::AddEdge(int v1, int v2)
 {
 	Edge edge;
 
@@ -143,7 +143,7 @@ bool FObject::EdgeExists(Edge edge)
 	}
 	return false;
 }
-void FObject::AddFace(float v1, float v2, float v3)
+void FObject::AddFace(int v1, int v2, int v3)
 {
 
 	Polygon *polygon = new Polygon;
@@ -163,8 +163,8 @@ void FObject::AddFace(float v1, float v2, float v3)
 	Vector vector1 = vertex[v2] - vertex[v1];
 	Vector vector2 = vertex[v3] - vertex[v1];
 	
-	//averageDistance += ~v1;
-	//averageDistance += ~v2;
+	averageDistance += ~v1;
+	averageDistance += ~v2;
 	numberEdges += 2;
 
 	neighbours[v2]->Add(&vertex[v1], &vertex[v2], v1);
@@ -172,8 +172,8 @@ void FObject::AddFace(float v1, float v2, float v3)
 	vector1 = vertex[v1] - vertex[v2];
 	vector2 = vertex[v3] - vertex[v2];
 
-	//averageDistance += ~v1;
-	//averageDistance += ~v2;
+	averageDistance += ~v1;
+	averageDistance += ~v2;
 	numberEdges += 2;
 
 	neighbours[v3]->Add(&vertex[v1], &vertex[v3], v1);
@@ -181,8 +181,8 @@ void FObject::AddFace(float v1, float v2, float v3)
 	vector1 = vertex[v1] - vertex[v3];
 	vector2 = vertex[v2] - vertex[v3];
 
-	//averageDistance += ~v1;
-	//averageDistance += ~v2;
+	averageDistance += ~v1;
+	averageDistance += ~v2;
 	numberEdges += 2;
 }
 
@@ -392,7 +392,6 @@ void FObject::Update() {
 		neekeri.push_back(vertex[i].y);
 		neekeri.push_back(vertex[i].z);
 	}
-
 	
 	_vertexBuffer.setData(neekeri);
 }

@@ -65,7 +65,7 @@ Application::Application()
 	textureMaps.diffuse = Texture::load(TextureType::Texture2D, "assets/textures/texture.png");
 
 	// Add a model file to the path below
-	_mesh = Mesh::load("assets/models/cube.dae", _effect, textureMaps);
+	_mesh = Mesh::load("assets/models/cube3.obj", _effect, textureMaps);
 
 	world.AddObject(FObject::CreateFObject(_effect, *_mesh));
 

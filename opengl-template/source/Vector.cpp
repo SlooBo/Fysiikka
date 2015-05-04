@@ -73,7 +73,10 @@ float Vector::operator*(const Vector &v)
 // Vector lenght
 float Vector::operator~()const
 {
-	return (float)glm::sqrt(this->x * this->x + this->y * this->y + this->z + this->z);
+	float result;
+	result = (float)glm::sqrt(this->x * this->x + this->y * this->y + this->z * this->z);
+
+	return result;
 }
 
 //Vector angle
@@ -87,10 +90,26 @@ float Vector::Angle(const Vector &v)
 
 Vector Vector::Normalize()
 {
-	this->x /= ~(*this);
-	this->y /= ~(*this);
-	this->z /= ~(*this);
+	//LÄJÄ PASKAA
+	/*
 
+
+											hue
+
+	*/
+	float value = ~(*this);
+	if (value != 0)
+	{
+		this->x /= value;
+		this->y /= value;
+		this->z /= value;
+	}
+	else if (value == 0)
+	{
+		this->x = 0;
+		this->z = 0;
+		this->y = 0;
+	}
 	return *this;
 }
 

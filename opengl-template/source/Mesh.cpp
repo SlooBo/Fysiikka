@@ -100,11 +100,11 @@ shared_ptr<Mesh> Mesh::load(const string& filepath, const shared_ptr<Effect>& ef
 
 			//TÄÄLLÄ ON VIRHE
 			// MIKSET JO KORJAA
-
+			/*
 			float x = mesh->mVertices[index].x;
 			float y = mesh->mVertices[index].y;
 			float z = mesh->mVertices[index].z;
-
+			*/
 			vertices[vertexSize * index]	  = mesh->mVertices[index].x;
 			vertices[vertexSize * index + 1u] = mesh->mVertices[index].y;
 			vertices[vertexSize * index + 2u] = mesh->mVertices[index].z;
@@ -113,6 +113,8 @@ shared_ptr<Mesh> Mesh::load(const string& filepath, const shared_ptr<Effect>& ef
 			pos[3u * index]		 = mesh->mVertices[index].x;
 			pos[3u * index + 1u] = mesh->mVertices[index].y;
 			pos[3u * index + 2u] = mesh->mVertices[index].z;
+
+			float nigger = mesh->mVertices[index].x;
 
 
 			if(meshHasTextureCoords)
