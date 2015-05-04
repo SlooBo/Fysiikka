@@ -110,7 +110,7 @@ shared_ptr<Mesh> Mesh::load(const string& filepath, const shared_ptr<Effect>& ef
 			vertices[vertexSize * index + 2u] = mesh->mVertices[index].z;
 			unsigned int offset = 3u;
 		
-			pos[3u * index] = mesh->mVertices[index].x;
+			pos[3u * index]		 = mesh->mVertices[index].x;
 			pos[3u * index + 1u] = mesh->mVertices[index].y;
 			pos[3u * index + 2u] = mesh->mVertices[index].z;
 
@@ -145,7 +145,7 @@ shared_ptr<Mesh> Mesh::load(const string& filepath, const shared_ptr<Effect>& ef
 	Mesh* ogltMesh = new Mesh(vertices, indices, vertexComponents, effect, textureMaps);
 	// TODO: add 'loaded' log entry
 	
-	ogltMesh->addPosVertices(vertices, indices);
+	ogltMesh->addPosVertices(pos, indices);
 	return shared_ptr<Mesh>(ogltMesh);
 }
 
