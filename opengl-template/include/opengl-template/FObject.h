@@ -52,10 +52,15 @@ class FObject
 		static std::shared_ptr<FObject> CreateFObject(const std::shared_ptr<Effect>& effect, Mesh& _mesh);
 		
 		//Dont use this one
-		FObject(const std::vector<float>& vertices,
+		FObject(const std::vector<float>& vertices, const std::vector<float>& fullVertices,
 			const std::vector<unsigned int>& indices, 
-			const std::shared_ptr<Effect>& effect);
+			const std::shared_ptr<Effect>& effect,
+			VertexComponents vertexComponents);
 		~FObject();
+
+		VertexComponents _vertexComponents;
+		std::vector<float> fullVertices;
+		std::vector<float> vertices;
 
 		std::vector<Vertex>vertex;
 		std::vector<Vertex>oldPos;

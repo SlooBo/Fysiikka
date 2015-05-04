@@ -159,6 +159,10 @@ std::vector<float> Mesh::getVertices()
 {
 	return posVertices;
 }
+std::vector<float> Mesh::getFullVertices()
+{
+	return fullVertices;
+}
 
 std::vector<unsigned int> Mesh::getIndices()
 {
@@ -176,6 +180,7 @@ Mesh::Mesh(const std::vector<float>& vertices, const std::vector<unsigned int>& 
 	  _vertexComponents(vertexComponents)
 {
 	_vertexBuffer.setData(vertices);
+	fullVertices = vertices;
 	_indexBuffer.setData(indices);
 
 	VertexFormat vertexFormat
