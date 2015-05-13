@@ -393,7 +393,7 @@ void FObject::Update() {
 		neekeri.push_back(vertex[i].z);
 	}
 	
-	_vertexBuffer.setData(vertex);
+	_vertexBuffer.setData(neekeri);
 }
 
 Vertex FObject::GetPosition() const { return this->center; }

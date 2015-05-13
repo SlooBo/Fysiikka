@@ -68,7 +68,7 @@ void World::DoWork()
 	float rad, dist;
 	calcDeltaTime();
 	time_elapsed += deltaTime;
-	if (time_elapsed >= 1)
+	if (time_elapsed >= 0.01)
 	{
 
 		for (i = 0; i < objects.size(); i++)
