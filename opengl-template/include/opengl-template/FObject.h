@@ -80,6 +80,8 @@ class FObject
 		float mass;
 		float cdRadius;
 
+		bool fixed;
+
 		int eSize, eStart;
 		float averageDistance;
 		int numberEdges;
@@ -103,7 +105,7 @@ class FObject
 
 		Vertex GetPosition() const;
 		float GetCDRadius() const;
-		float GetFixed() const;
+		bool GetFixed() const;
 
 		bool CollisionDetected(FObject &o, std::vector<CollisionEdge> &collisionEdges,
 			std::vector<Vertex> &collisionPoints) const;

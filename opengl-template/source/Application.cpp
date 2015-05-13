@@ -65,7 +65,7 @@ Application::Application()
 	textureMaps.diffuse = Texture::load(TextureType::Texture2D, "assets/textures/texture.png");
 
 	// Add a model file to the path below
-	_mesh = Mesh::load("assets/models/cube3.obj", _effect, textureMaps);
+	_mesh = Mesh::load("assets/models/cube.dae", _effect, textureMaps);
 
 	std::shared_ptr<FObject> fobj = FObject::CreateFObject(_effect, *_mesh);
 	fobj->SetPosition(Vertex(0, 8, 0));
@@ -73,7 +73,7 @@ Application::Application()
 	world.AddObject(fobj);
 
 	std::shared_ptr<FObject> fobj2 = FObject::CreateFObject(_effect, *_mesh);
-	fobj2->SetPosition(Vertex(0, -5, 0));
+	fobj2->SetPosition(Vertex(0.5, -5, 0));
 	fobj2->gravity = Vector(0, 50, 0);
 	world.AddObject(fobj2);
 

@@ -50,7 +50,8 @@ FObject::FObject(const std::vector<float>& vertices, const std::vector<unsigned 
 	eStart = 0;
 	averageDistance = 0;
 	numberEdges = 0;
-	k = 0;
+	k = 5;
+	fixed = false;
 
 	VertexFormat vertexFormat
 	{
@@ -398,7 +399,7 @@ void FObject::Update() {
 
 Vertex FObject::GetPosition() const { return this->center; }
 float   FObject::GetCDRadius() const { return this->cdRadius; }
-float   FObject::GetFixed() const { return false; }
+bool   FObject::GetFixed() const { return fixed; }
 
 FObject::~FObject() {
 	for (int i = 0; i < (int)face.size(); i++) {
@@ -461,9 +462,9 @@ bool FObject::CollisionDetected(FObject &o, std::vector<CollisionEdge> &collisio
 				{
 					angle = 0;
 
-					for (int l = 2, k = 0; k < 3; l = k++)
+					for (int l = 2, z = 0; z < 3; l = z++)
 					{
-						int new_angle = ((*(o.face[j]->vertex[k])) - pointToCheck).Angle(
+						int new_angle = ((*(o.face[j]->vertex[z])) - pointToCheck).Angle(
 							((*o.face[j]->vertex[l]) - pointToCheck));
 
 						angle += new_angle;
