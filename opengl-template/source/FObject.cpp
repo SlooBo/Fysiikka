@@ -43,7 +43,6 @@ FObject::FObject(const std::vector<float>& vertices, const std::vector<unsigned 
 	_effect(effect)
 {
 
-	isFixed = false;
 	//Create data for drawing.
 	_vertexBuffer.setData(vertices);
 	_indexBuffer.setData(indices);
@@ -51,7 +50,7 @@ FObject::FObject(const std::vector<float>& vertices, const std::vector<unsigned 
 	eStart = 0;
 	averageDistance = 0;
 	numberEdges = 0;
-	k = 5;
+	k = 50;
 	fixed = false;
 
 	VertexFormat vertexFormat
@@ -95,7 +94,7 @@ FObject::FObject(const std::vector<float>& vertices, const std::vector<unsigned 
 	BuildDone();
 	averageDistance = averageDistance / numberEdges;
 
-	gravity = Vector(0, 9.81, 0);
+	gravity = Vector(0, -9.81, 0);
 	mass = vertex.size();
 
 }
@@ -294,7 +293,7 @@ void FObject::Update() {
 
 			Vector deltaVel = velocity[i] - velocity[neighbours[i]->indexes[j]];
 			Vector deltaPos = vertex[i] - vertex[neighbours[i]->indexes[j]];
-
+			
 			if (!(0.0001 > delta && delta > -0.0001)) {
 				Vector direct(((neighbours[i]->vertexes[j]->x) - vertex[i].x),
 					((neighbours[i]->vertexes[j]->y) - vertex[i].y),
@@ -310,13 +309,14 @@ void FObject::Update() {
 
 				totalF = totalF + direct;
 			}
-
+			
 		}
-
+		
 		float delta = center.GetDistance(vertex[i]) - distanceToCenter[i];
 		Vector deltaVel = velocity[i] - centerVel; // - velocity[depend[i]->index[j]];
+		
 		Vector deltaPos = vertex[i] - center;
-		/*
+		
 		if (!(0.0001 > delta && delta > -0.0001)) {
 		Vector direct(  ((center.x ) - vertex[i].x),
 		((center.y ) - vertex[i].y),
@@ -334,7 +334,7 @@ void FObject::Update() {
 
 		totalF = totalF + direct;
 		}
-		*/
+		
 		force_internal[i].x = totalF.x;
 		force_internal[i].y = totalF.y;
 		force_internal[i].z = totalF.z;
@@ -342,13 +342,13 @@ void FObject::Update() {
 		acceleration[i] = ((force_internal[i] + force_external[i]) / ((float)(mass / (float)vertex.size())))
 			+ gravity;
 
-		if (vertex[i].y <= 0 && velocity[i].y < 0) {
+		if (vertex[i].y >= 0 && velocity[i].y < 0) {
 			velocity[i].y = -velocity[i].y / 2;
 			velocity[i].x = velocity[i].x / 2;
 			velocity[i].z = velocity[i].z / 2;
 
 			vertex[i].y = 0;
-			/*
+			
 			for (int sp = 0; sp < vertex.size(); sp++) {
 			if (sp != i){
 			velocity[sp].y = - velocity[sp].y/1.5;
@@ -356,7 +356,7 @@ void FObject::Update() {
 			velocity[sp].z = velocity[sp].z/1.5;
 			}
 			}
-			*/
+			
 		}
 	}
 
@@ -401,7 +401,6 @@ void FObject::Update() {
 Vertex FObject::GetPosition() const { return this->center; }
 float   FObject::GetCDRadius() const { return this->cdRadius; }
 bool   FObject::GetFixed() const { return fixed; }
-bool   FObject::GetFixed() const { return isFixed; }
 
 FObject::~FObject() {
 	for (int i = 0; i < (int)face.size(); i++) {

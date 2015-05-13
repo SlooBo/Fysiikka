@@ -68,18 +68,20 @@ Application::Application()
 	_mesh = Mesh::load("assets/models/cube.dae", _effect, textureMaps);
 
 	std::shared_ptr<FObject> fobj = FObject::CreateFObject(_effect, *_mesh);
-	fobj->SetPosition(Vertex(0, 7, 0));
+	fobj->SetPosition(Vertex(0, -7, 0));
 	fobj->gravity = Vector(0, 0, 0);
+	fobj->SetExAcceleration(1, Vector(0,5,0));
 	world.AddObject(fobj);
 
 	std::shared_ptr<FObject> fobj2 = FObject::CreateFObject(_effect, *_mesh);
-	fobj2->SetPosition(Vertex(0.5, -5, 0));
-	fobj2->gravity = Vector(0, 50, 0);
+	fobj2->SetPosition(Vertex(0.5, -1, 0));
+	fobj2->gravity = Vector(0, -9.81, 0);
 	world.AddObject(fobj2);
 
 	glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
+
 }
 
 Application::~Application()
@@ -90,6 +92,8 @@ Application::~Application()
 void Application::update()
 {
 	// Updating and drawing
+
+	
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
