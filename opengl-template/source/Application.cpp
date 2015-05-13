@@ -68,7 +68,7 @@ Application::Application()
 	_mesh = Mesh::load("assets/models/cube.dae", _effect, textureMaps);
 
 	std::shared_ptr<FObject> fobj = FObject::CreateFObject(_effect, *_mesh);
-	fobj->SetPosition(Vertex(0, 8, 0));
+	fobj->SetPosition(Vertex(0, 7, 0));
 	fobj->gravity = Vector(0, 0, 0);
 	world.AddObject(fobj);
 

@@ -87,6 +87,7 @@ class FObject
 		int numberEdges;
 		Vector gravity;
 
+		bool isFixed;
 
 		void Draw();
 

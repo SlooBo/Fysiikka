@@ -43,6 +43,7 @@ FObject::FObject(const std::vector<float>& vertices, const std::vector<unsigned 
 	_effect(effect)
 {
 
+	isFixed = false;
 	//Create data for drawing.
 	_vertexBuffer.setData(vertices);
 	_indexBuffer.setData(indices);
@@ -400,6 +401,7 @@ void FObject::Update() {
 Vertex FObject::GetPosition() const { return this->center; }
 float   FObject::GetCDRadius() const { return this->cdRadius; }
 bool   FObject::GetFixed() const { return fixed; }
+bool   FObject::GetFixed() const { return isFixed; }
 
 FObject::~FObject() {
 	for (int i = 0; i < (int)face.size(); i++) {
