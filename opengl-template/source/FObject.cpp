@@ -93,7 +93,7 @@ FObject::FObject(const std::vector<float>& vertices, const std::vector<unsigned 
 	BuildDone();
 	averageDistance = averageDistance / numberEdges;
 
-	gravity = Vector(0, -9.81, 0);
+	gravity = Vector(0, 9.81, 0);
 	mass = vertex.size();
 
 }
@@ -393,7 +393,7 @@ void FObject::Update() {
 		neekeri.push_back(vertex[i].z);
 	}
 	
-	_vertexBuffer.setData(neekeri);
+	_vertexBuffer.setData(vertex);
 }
 
 Vertex FObject::GetPosition() const { return this->center; }
