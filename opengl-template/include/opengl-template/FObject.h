@@ -85,6 +85,7 @@ class FObject
 		int numberEdges;
 		Vector gravity;
 
+		bool isFixed;
 
 		void Draw();
 
@@ -103,7 +104,7 @@ class FObject
 
 		Vertex GetPosition() const;
 		float GetCDRadius() const;
-		float GetFixed() const;
+		bool GetFixed() const;
 
 		bool CollisionDetected(FObject &o, std::vector<CollisionEdge> &collisionEdges,
 			std::vector<Vertex> &collisionPoints) const;
