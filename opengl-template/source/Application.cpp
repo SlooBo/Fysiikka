@@ -67,7 +67,15 @@ Application::Application()
 	// Add a model file to the path below
 	_mesh = Mesh::load("assets/models/cube3.obj", _effect, textureMaps);
 
-	world.AddObject(FObject::CreateFObject(_effect, *_mesh));
+	std::shared_ptr<FObject> fobj = FObject::CreateFObject(_effect, *_mesh);
+	fobj->SetPosition(Vertex(0, 8, 0));
+	fobj->gravity = Vector(0, 0, 0);
+	world.AddObject(fobj);
+
+	std::shared_ptr<FObject> fobj2 = FObject::CreateFObject(_effect, *_mesh);
+	fobj2->SetPosition(Vertex(0, -5, 0));
+	fobj2->gravity = Vector(0, 50, 0);
+	world.AddObject(fobj2);
 
 	glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
 	glEnable(GL_CULL_FACE);
